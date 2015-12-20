@@ -1,0 +1,14 @@
+{
+  "name": "location",
+  "version": "0.0.1",
+  "profile": "aws-0",
+  "location": "https://github.com/Shizuoka-Oden/kuro-hanpen-server",
+  "author": "",
+  "description": "",
+  "custom": {},
+  "cloudFormation": {
+    "lambdaIamPolicyDocumentStatements": [],
+    "resources": {}
+  },
+  "runtime": "nodejs"
+}

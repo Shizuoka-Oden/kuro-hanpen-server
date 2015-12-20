@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "profile": "serverless-0",
+  "location": "https://github.com/Shizuoka-Oden/kuro-hanpen-server",
+  "author": "",
+  "description": "",
+  "domain": "api.sz-oden.tk",
+  "stages": {
+    "development": [
+      {
+        "region": "ap-northeast-1",
+        "iamRoleArnLambda": "arn:aws:iam::744238287558:role/server-development-r-IamRoleLambda-1XCKQ309ES839",
+        "regionBucket": "serverless.apnortheast1.api.sz-oden.tk",
+        "restApiId": "m4fgyamv41"
+      }
+    ],
+    "production": [
+      {
+        "region": "ap-northeast-1",
+        "iamRoleArnLambda": "arn:aws:iam::744238287558:role/server-production-r-IamRoleLambda-1T6FBIJNN0GSK",
+        "regionBucket": "serverless.apnortheast1.api.sz-oden.tk",
+        "restApiId": "m4fgyamv41"
+      }
+    ]
+  },
+  "custom": {},
+  "plugins": [
+  ]
+}
