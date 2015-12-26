@@ -19,7 +19,11 @@
           },
           "responses": {
             "400": {
-              "statusCode": "400"
+              "statusCode": "400",
+              "selectionPattern": "invalid type.*",
+              "responseTemplates": {
+                "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"errorMessage\": \"$inputRoot.errorMessage\",\n  \"errorType\": \"$inputRoot.errorType\"#if($context.stage == \"development\"),\n  \"stackTrace\": $inputRoot.stackTrace#end\n\n}"
+              }
             },
             "default": {
               "statusCode": "200",

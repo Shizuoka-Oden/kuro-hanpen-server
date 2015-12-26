@@ -22,7 +22,7 @@ module.exports.handler = function(event, context) {
     var VALID_TYPES = ['幼稚園', '保育園', '小学校', '中学校', '高校', '公園', 'ヒヤリハット'];
     for (var i = 0; i < types.length; i++) {
       if (VALID_TYPES.indexOf(types[i]) === -1) {
-        return context.done(null, {statusCode: 400, message: "invalid type " + types[i] });
+        return context.done(new Error("invalid type " + types[i]));
       }
     }
   }
