@@ -8,8 +8,9 @@
       "handler": "modules/location/createlocation/handler.handler",
       "timeout": 6,
       "memorySize": 1024,
-      "endpoints": {
-        "location": {
+      "endpoints": [
+        {
+          "path": "location",
           "method": "POST",
           "authorizationType": "none",
           "apiKeyRequired": false,
@@ -37,7 +38,7 @@
             }
           }
         }
-      },
+      ],
       "pathFunction": "modules/location/createlocation/s-function.json",
       "name": "createlocation"
     }

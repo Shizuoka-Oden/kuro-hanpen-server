@@ -8,8 +8,9 @@
       "handler": "modules/location/readlocations/handler.handler",
       "timeout": 6,
       "memorySize": 1024,
-      "endpoints": {
-        "location": {
+      "endpoints": [
+        {
+          "path": "location",
           "method": "GET",
           "authorizationType": "none",
           "apiKeyRequired": false,
@@ -37,7 +38,7 @@
             }
           }
         }
-      },
+      ],
       "pathFunction": "modules/location/readlocations/s-function.json",
       "name": "readlocations"
     }
