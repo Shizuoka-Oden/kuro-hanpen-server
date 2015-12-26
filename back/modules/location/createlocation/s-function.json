@@ -15,15 +15,21 @@
           "apiKeyRequired": false,
           "requestParameters": {},
           "requestTemplates": {
-            "application/json": ""
+            "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"type\": \"$inputRoot.type\",\n  \"address\": \"$inputRoot.address\",\n  \"location\": $inputRoot.location,\n  \"title\": \"$inputRoot.title\",\n  \"description\": \"$inputRoot.description\"\n}\n"
           },
           "responses": {
             "400": {
-              "statusCode": "400"
+              "statusCode": "400",
+              "selectionPattern": "invalid request.*",
+              "responseTemplates": {
+                "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"errorMessage\": \"$inputRoot.errorMessage\",\n  \"errorType\": \"$inputRoot.errorType\"#if($context.stage == \"development\"),\n  \"stackTrace\": $inputRoot.stackTrace#end\n\n}"
+              }
             },
             "default": {
               "statusCode": "200",
-              "responseParameters": {},
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+                },
               "responseModels": {},
               "responseTemplates": {
                 "application/json": ""

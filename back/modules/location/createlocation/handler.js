@@ -11,25 +11,37 @@
 var ServerlessHelpers = require('serverless-helpers-js').loadEnv();
 
 // Require Logic
-var lib = require('../lib');
+var esRequest = require('../lib/esRequest');
+var validator = require('../lib/validator');
 
 // Lambda Handler
 module.exports.handler = function(event, context) {
-  var response = {
-    "_id": "zzzzzzzzz",
-    "type": "ヒヤリハット",
-    "address": "葵区追手町９−６",
-    "location": {
-      "lat": 34.9738584,
-      "lon": 138.3851473
-    },
-    "title": "静岡県庁",
-    "description": "詳細情報画面に表示する説明文",
-    "preset": false
-  };
-  return context.done(null, response);
 
-  // lib.respond(event, function(error, response) {
-  //   return context.done(error, response);
-  // });
+  var location = {
+    type: event.type,
+    address: event.address,
+    location: event.location,
+    title: event.title,
+    description: event.description,
+    preset: false
+  };
+
+  if (!validator.locationValidate(location)) {
+    console.log(validator.locationValidate.errors());
+    return context.done(
+      new Error("invalid request : " + JSON.stringify(validator.locationValidate.errors()))
+    );
+  }
+
+  esRequest.createLocations(location)
+  .then(function(response) {
+    console.log(JSON.stringify(response));
+    location._id = response._id;
+    return context.done(null, location);
+  })
+  .catch(function(err) {
+    console.log(err);
+    return context.done(err);
+  });
+
 };

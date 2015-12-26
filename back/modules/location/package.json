@@ -14,6 +14,7 @@
   "dependencies": {
     "aws-sdk": "^2.2.26",
     "bluebird": "^3.1.1",
+    "is-my-json-valid": "^2.12.3",
     "serverless-helpers-js": "~0.0.3"
   }
 }

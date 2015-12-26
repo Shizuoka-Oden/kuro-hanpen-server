@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Location Schema",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "pattern": "^ヒヤリハット$"
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 512
+    }
+  },
+  "required": [
+    "type",
+    "address",
+    "location",
+    "title",
+    "description"
+  ]
+}
