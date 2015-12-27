@@ -1,27 +1,28 @@
 {
   "functions": {
-    "createlocation": {
+    "deletelocation": {
       "custom": {
         "excludePatterns": [],
         "envVars": []
       },
-      "handler": "modules/location/createlocation/handler.handler",
+      "handler": "modules/location/deletelocation/handler.handler",
       "timeout": 6,
       "memorySize": 1024,
+      "eventSourceArn": "",
       "endpoints": [
         {
-          "path": "location",
-          "method": "POST",
+          "path": "location/{locationId}",
+          "method": "DELETE",
           "authorizationType": "none",
           "apiKeyRequired": false,
           "requestParameters": {},
           "requestTemplates": {
-            "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"type\": \"$inputRoot.type\",\n  \"address\": \"$inputRoot.address\",\n  \"location\": $inputRoot.location,\n  \"title\": \"$inputRoot.title\",\n  \"description\": \"$inputRoot.description\"\n}\n"
+            "application/json": "{\"locationId\":\"$input.params('locationId')\"}"
           },
           "responses": {
             "400": {
               "statusCode": "400",
-              "selectionPattern": "invalid request.*",
+              "selectionPattern": "invalid id.*",
               "responseTemplates": {
                 "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"errorMessage\": \"$inputRoot.errorMessage\",\n  \"errorType\": \"$inputRoot.errorType\"#if($context.stage == \"development\"),\n  \"stackTrace\": $inputRoot.stackTrace#end\n\n}"
               }
@@ -38,9 +39,7 @@
             }
           }
         }
-      ],
-      "pathFunction": "modules/location/createlocation/s-function.json",
-      "name": "createlocation"
+      ]
     }
   }
 }

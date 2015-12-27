@@ -1,6 +1,6 @@
 {
   "functions": {
-    "LocationReadlocations": {
+    "readlocations": {
       "custom": {
         "excludePatterns": [],
         "envVars": []

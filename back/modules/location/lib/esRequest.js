@@ -51,6 +51,11 @@ module.exports.send = function(method, path, body) {
   });
 };
 
+// 位置情報の登録
+module.exports.getLocation = function(id) {
+  return this.send('GET', '/kuro-hanpen/location/' + id);
+}
+
 // 位置情報の検索
 module.exports.searchLocations = function(types) {
   var body = {
@@ -68,6 +73,11 @@ module.exports.searchLocations = function(types) {
 }
 
 // 位置情報の登録
-module.exports.createLocations = function(body) {
+module.exports.createLocation = function(body) {
   return this.send('POST', '/kuro-hanpen/location', JSON.stringify(body));
+}
+
+// 位置情報の削除
+module.exports.deleteLocation = function(id) {
+  return this.send('DELETE', '/kuro-hanpen/location/' + id);
 }
