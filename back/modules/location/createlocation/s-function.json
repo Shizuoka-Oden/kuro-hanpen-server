@@ -16,7 +16,7 @@
           "apiKeyRequired": false,
           "requestParameters": {},
           "requestTemplates": {
-            "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"type\": \"$inputRoot.type\",\n  \"address\": \"$inputRoot.address\",\n  \"location\": $inputRoot.location,\n  \"title\": \"$inputRoot.title\",\n  \"description\": \"$inputRoot.description\"\n}\n"
+            "application/json": ""
           },
           "responses": {
             "400": {

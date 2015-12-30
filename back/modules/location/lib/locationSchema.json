@@ -20,7 +20,11 @@
         "lon": {
           "type": "number"
         }
-      }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ]
     },
     "title": {
       "type": "string",
