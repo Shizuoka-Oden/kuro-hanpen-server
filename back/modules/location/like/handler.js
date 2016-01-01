@@ -43,10 +43,10 @@ module.exports.handler = function(event, context) {
       return context.done(null, {});
     }
     body.likes.push(user);
-    esRequest.updateLocation(id, body);
+    return esRequest.updateLocation(id, body);
   })
   .then(function(response) {
-    return context.done(null, {});
+    return context.done(null, {success:true});
   })
   .catch(function(err) {
     return context.done(err);

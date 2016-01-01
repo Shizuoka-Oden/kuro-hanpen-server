@@ -74,15 +74,15 @@ module.exports.searchLocations = function(types) {
 
 // 位置情報の登録
 module.exports.createLocation = function(body) {
-  return this.send('POST', '/kuro-hanpen/location', JSON.stringify(body));
+  return this.send('POST', '/kuro-hanpen/location?refresh=true', JSON.stringify(body));
 }
 
 // 位置情報の更新
 module.exports.updateLocation = function(id, body) {
-  return this.send('POST', '/kuro-hanpen/location/' + id, JSON.stringify(body));
+  return this.send('PUT', '/kuro-hanpen/location/' + id + '?refresh=true', JSON.stringify(body));
 }
 
 // 位置情報の削除
 module.exports.deleteLocation = function(id) {
-  return this.send('DELETE', '/kuro-hanpen/location/' + id);
+  return this.send('DELETE', '/kuro-hanpen/location/' + id + '?refresh=true');
 }
