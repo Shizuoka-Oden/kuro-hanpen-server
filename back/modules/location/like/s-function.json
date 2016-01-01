@@ -1,0 +1,45 @@
+{
+  "functions": {
+    "like": {
+      "custom": {
+        "excludePatterns": [],
+        "envVars": []
+      },
+      "handler": "modules/location/like/handler.handler",
+      "timeout": 6,
+      "memorySize": 1024,
+      "eventSourceArn": "",
+      "endpoints": [
+        {
+          "path": "location/{locationId}/like",
+          "method": "POST",
+          "authorizationType": "none",
+          "apiKeyRequired": false,
+          "requestParameters": {},
+          "requestTemplates": {
+            "application/json": "{\"locationId\":\"$input.params('locationId')\",\"user\":\"$input.params('user')\"}"
+          },
+          "responses": {
+            "400": {
+              "statusCode": "400",
+              "selectionPattern": "invalid id.*",
+              "responseTemplates": {
+                "application/json": "#set($inputRoot = $input.path('$'))\n{\n  \"errorMessage\": \"$inputRoot.errorMessage\",\n  \"errorType\": \"$inputRoot.errorType\"#if($context.stage == \"development\"),\n  \"stackTrace\": $inputRoot.stackTrace#end\n\n}"
+              }
+            },
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+                },
+              "responseModels": {},
+              "responseTemplates": {
+                "application/json": ""
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
