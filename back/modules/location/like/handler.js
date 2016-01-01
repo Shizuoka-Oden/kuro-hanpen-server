@@ -23,7 +23,7 @@ module.exports.handler = function(event, context) {
   var user = event.user;
   var regex = new RegExp("^ap-northeast-1:[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}-_-.*$");
   if (!regex.test(user)) {
-    throw new Error('invalid id. user format. ' + user); 
+    return context.done(new Error('invalid id. user format. ' + user));
   }
 
   esRequest.getLocation(id)
@@ -39,10 +39,11 @@ module.exports.handler = function(event, context) {
     if (!body.likes) {
       body.likes = [];
     }
-    if (body.likes.indexOf(user)==-1) {
-      body.likes.push(user);
-      esRequest.updateLocation(id, body);
+    if (body.likes.indexOf(user)>=0) {
+      return context.done(null, {});
     }
+    body.likes.push(user);
+    esRequest.updateLocation(id, body);
   })
   .then(function(response) {
     return context.done(null, {});

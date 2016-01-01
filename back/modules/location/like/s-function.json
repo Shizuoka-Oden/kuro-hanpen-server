@@ -17,7 +17,7 @@
           "apiKeyRequired": false,
           "requestParameters": {},
           "requestTemplates": {
-            "application/json": "{\"locationId\":\"$input.params('locationId')\",\"user\":\"$input.params('user')\"}"
+            "application/json": "{\"locationId\":\"$input.params('locationId')\",\"user\":$input.json('$.user')}"
           },
           "responses": {
             "400": {
