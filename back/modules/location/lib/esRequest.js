@@ -73,6 +73,8 @@ module.exports.searchLocations = function(types, sort) {
   if (sort) {
     body.sort = [{ "likesCount": { "order": "desc", "missing": "_last" }}, "_id"];
     body.size = 100;
+    body.query.bool.must = [];
+    body.query.bool.must.push( { range: { likesCount: { gte: 1 }}} );
   }
 
   return this.send('POST', '/kuro-hanpen/location/_search', JSON.stringify(body));
