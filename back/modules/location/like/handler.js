@@ -43,6 +43,7 @@ module.exports.handler = function(event, context) {
       return context.done(null, {});
     }
     body.likes.push(user);
+    body.likesCount = body.likes.length;
     return esRequest.updateLocation(id, body);
   })
   .then(function(response) {

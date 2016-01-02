@@ -57,7 +57,7 @@ module.exports.getLocation = function(id) {
 }
 
 // 位置情報の検索
-module.exports.searchLocations = function(types) {
+module.exports.searchLocations = function(types, sort) {
   var body = {
     size: 2500,
     query: { match_all : {}}
@@ -69,6 +69,12 @@ module.exports.searchLocations = function(types) {
       body.query.bool.should.push( { match: { type: { query: type }}} );
     });
   }
+
+  if (sort) {
+    body.sort = [{ "likesCount": { "order": "desc", "missing": "_last" }}, "_id"];
+    body.size = 100;
+  }
+
   return this.send('POST', '/kuro-hanpen/location/_search', JSON.stringify(body));
 }
 

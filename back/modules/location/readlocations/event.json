@@ -1,3 +1,4 @@
 {
-  "type": "中学校,小学校"
+  "type": "中学校,小学校",
+  "sort": "likesCount"
 }
