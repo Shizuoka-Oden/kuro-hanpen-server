@@ -23,6 +23,7 @@ module.exports.handler = function(event, context) {
     location: event.location,
     title: event.title,
     description: event.description,
+    author: event.author,
     preset: false
   };
 
