@@ -72,7 +72,7 @@ module.exports.searchLocations = function(types, sort) {
 
   if (sort) {
     body.sort = [{ "likesCount": { "order": "desc", "missing": "_last" }}, "_id"];
-    body.size = 100;
+    body.size = 10;
     body.query.bool.must = [];
     body.query.bool.must.push( { range: { likesCount: { gte: 1 }}} );
   }
