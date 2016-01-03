@@ -94,3 +94,22 @@ module.exports.updateLocation = function(id, body) {
 module.exports.deleteLocation = function(id) {
   return this.send('DELETE', '/kuro-hanpen/location/' + id + '?refresh=true');
 }
+
+// 作成者の集計
+module.exports.aggsAuthorCount = function() {
+  var body = {
+    size: 0,
+    query: { match_all : {}},
+    aggs: {
+      type: {
+        terms: {
+          field: "author",
+          size: 10,
+          order : { "_count" : "desc" }
+        }
+      }
+    }
+  };
+
+  return this.send('POST', '/kuro-hanpen/location/_search', JSON.stringify(body));
+}
